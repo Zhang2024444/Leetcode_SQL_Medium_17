@@ -1,0 +1,18 @@
+(SELECT A2.name as results 
+FROM MovieRating A3
+JOIN Users A2
+ON A2.user_id = A3.user_id 
+GROUP BY A2.name 
+ORDER BY COUNT(A3.rating) DESC, A2.name
+LIMIT 1)
+
+UNION ALL 
+
+(SELECT A1.title AS results 
+FROM MovieRating A3
+JOIN Movies A1 
+ON A1.movie_id = A3.movie_id
+WHERE DATE_FORMAT(A3.created_at,"%Y-%m")='2020-02'
+GROUP BY A1.title 
+ORDER BY AVG(A3.rating) DESC, title 
+LIMIT 1)
