@@ -1,0 +1,4 @@
+SELECT ROUND(SUM(CASE WHEN order_date=customer_pref_delivery_date then 1 else 0 end)/COUNT(*)*100,2)
+AS immediate_percentage 
+FROM Delivery 
+WHERE (customer_id,order_date) in (SELECT customer_id, MIN(order_date) from delivery GROUP BY customer_Id)
